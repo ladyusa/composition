@@ -1,39 +1,33 @@
 package atm;
 
 public class BankAccount {
-    private int id;
-    private String name;
+
     private double balance;
 
-    public BankAccount(int id, String name, double balance) {
-        this.id = id;
-        this.name = name;
+    // cascading constructor
+    public BankAccount() {
+        this(0);
+    }
+
+    public BankAccount(double balance) {
         this.balance = balance;
     }
 
-    // cascading constructor
-    public BankAccount(int id, String name) {
-        this(id, name, 0);
-    }
-
     public void deposit(double amount) {
-        balance += amount;
+        if (amount <= 0)
+            throw new IllegalArgumentException("Amount must be positive");
+        this.balance += amount;
     }
 
     public void withdraw(double amount) {
-        balance -= amount;
+        if (amount <= 0)
+            throw new IllegalArgumentException("Amount must be positive");
+        if (amount > balance)
+            throw new IllegalArgumentException("Amount must be less than balance");
+        this.balance -= amount;
     }
 
     public double getBalance() {
         return balance;
-    }
-
-    @Override
-    public String toString() {
-        return "BankAccount{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", balance=" + balance +
-                '}';
     }
 }

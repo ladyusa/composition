@@ -11,10 +11,6 @@ public class Email {
         this.text = text;
     }
 
-    public Email(String from, String to) {
-        this(from, to, "");
-    }
-
     public void setText(String text) {
         this.text = text;
     }
@@ -31,10 +27,11 @@ public class Email {
         return recipient;
     }
 
-    public String format() {
+    @Override
+    public String toString() {
         return "From: " + sender + "\n" +
                 "To: " + recipient + "\n" +
-                text + "\n";
+                text;
     }
 }
 

@@ -1,8 +1,12 @@
 package invoice;
 
 public class InvoiceLineDetail {
-    private Product product;  // composition
-    private int quantity;     // attribute
+
+    // composition
+    private Product product;
+
+    // attribute
+    private int quantity;
 
     public InvoiceLineDetail(Product product, int quantity) {
         this.product = product;

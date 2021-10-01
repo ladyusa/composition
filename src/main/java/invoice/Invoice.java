@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Invoice {
-    private String address;           // composition
-    private List<InvoiceLineDetail> products;   // composition
+
+    // composition
+    private String address;
+    private List<InvoiceLineDetail> products;
 
     public Invoice(String address) {
         this.address = address;

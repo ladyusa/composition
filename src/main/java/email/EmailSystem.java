@@ -1,40 +1,31 @@
 package email;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class EmailSystem {
-    private ArrayList<Mailbox> mailboxes;
+
+    // composition
+    private Map<String,Inbox> inboxes;
 
     public EmailSystem() {
-        mailboxes = new ArrayList<Mailbox>();
+        inboxes = new HashMap<>();
     }
 
-    public void send(Email m) {
-        Mailbox box = find(m.getRecipient());
-        box.addMessage(m);
+    public void send(Email email) {
+        String recipient = email.getRecipient();
+
+        if (inboxes.get(recipient) == null)
+            inboxes.put(recipient, new Inbox(recipient));
+
+        Inbox recipientInbox = inboxes.get(recipient);
+        recipientInbox.receive(email);
     }
 
-    public String readMessages(String user) {
-        Mailbox box = find(user);
-        return box.listMessages();
-    }
-
-    /**
-     Finds a mailbox or creates a new one if none existed for
-     the given user.
-     @param user the user
-     @return the mailbox of the user
-     */
-    private Mailbox find(String user) {
-        for (Mailbox m : mailboxes) {
-            if (m.getUser().equals(user)) {
-                return m;
-            }
-        }
-
-        Mailbox m = new Mailbox(user);
-        mailboxes.add(m);
-        return m;
+    public List<Email> read(String owner) {
+        Inbox ownerInbox = inboxes.get(owner);
+        return ownerInbox.readAll();
     }
 }
 

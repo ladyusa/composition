@@ -15,7 +15,7 @@ public class Main {
         peterInvoice.purchase(icecream, 1);
         peterInvoice.purchase(bun, 3);
 
-        System.out.println(   peterInvoice.toString()   );
+        System.out.println(   peterInvoice   );
 
         Invoice katInvoice = new Invoice("Katherine \nBangkhen");
         katInvoice.purchase(bun, 2);

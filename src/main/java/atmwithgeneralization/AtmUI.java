@@ -1,5 +1,6 @@
-package atm;
+package atmwithgeneralization;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -7,6 +8,7 @@ import java.util.Scanner;
  */
 public class AtmUI {
 
+	// composition
 	private ATM atm;
 
 	public AtmUI(ATM atm) {
@@ -21,9 +23,10 @@ public class AtmUI {
 			int number = in.nextInt();
 			System.out.print("Enter PIN: ");
 			int pin = in.nextInt();
+			String name = atm.validateCustomer(number, pin);
 
-			if (atm.validateCustomer(number, pin)) {
-				System.out.println("----- Welcome " + atm.getCustomerName() + " -----");
+			if (name != null) {
+				System.out.println("----- Welcome " + name + " -----");
 				System.out.println("    Balance=" + atm.getBalance());
 				System.out.print("A=Deposit, B=Withdrawal, C=Transfer, D=Done, E=Exit: ");
 				String command = in.next();

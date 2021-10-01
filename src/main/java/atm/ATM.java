@@ -1,6 +1,8 @@
 package atm;
 
 public class ATM {
+
+    // composition
     private Bank bank;
     private Customer loginCustomer;
 
@@ -9,14 +11,12 @@ public class ATM {
         this.loginCustomer = null;
     }
 
-    public String validateCustomer(int id, int pin) {
-        Customer customer = bank.findCustomer(id);
-
-        if (customer != null && customer.checkPin(pin)) {
-            loginCustomer = customer;
-            return customer.getName();
-        }
-        return null;
+    public boolean validateCustomer(int id, int pin) {
+        // delegation : มอยหมายงานให้ object อื่นช่วยทำงานแทนให้
+        loginCustomer = bank.validateCustomer(id, pin);
+        if (loginCustomer != null)
+            return true;
+        return false;
     }
 
     public void deposit(double amount) {
@@ -30,6 +30,7 @@ public class ATM {
     }
 
     public double getBalance() {
+        // delegation
         return loginCustomer.getAccount().getBalance();
     }
 
@@ -43,5 +44,9 @@ public class ATM {
 
     public void end() {
         loginCustomer = null;
+    }
+
+    public String getCustomerName() {
+        return loginCustomer.getName();
     }
 }

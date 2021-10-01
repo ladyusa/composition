@@ -1,6 +1,8 @@
 package invoice;
 
 public class Product {
+
+    // attribute
     private String name;
     private double price;
 
